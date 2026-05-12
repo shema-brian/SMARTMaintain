@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMARTMaintain — Schedules</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <h2>SMARTMaintain</h2>
+    <p>Masaka Farms, Kigali</p>
+  </div>
+  <nav class="sidebar-nav">
+    <p class="nav-label">Main Menu</p>
+    <a class="nav-item" href="dashboard.html">
+      <span class="icon">&#9632;</span> Dashboard
+    </a>
+    <a class="nav-item" href="equipment.html">
+      <span class="icon">&#9881;</span> Equipment
+    </a>
+    <a class="nav-item active" href="schedules.html">
+      <span class="icon">&#128197;</span> Schedules
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">--</div>
+      <div class="user-info">
+        <p id="user-name">Loading...</p>
+        <span id="user-role">--</span>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="Auth.logout()">Sign out</button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <h1>Maintenance Schedules</h1>
+    <div class="topbar-right">
+      <select id="filter-status" onchange="filterSchedules()"
+              style="padding:7px 12px;border:1px solid #E2E2E2;
+                     border-radius:8px;font-size:13px;cursor:pointer;">
+        <option value="all">All Statuses</option>
+        <option value="scheduled">Scheduled</option>
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+        <option value="overdue">Overdue</option>
+      </select>
+      <button class="btn btn-primary" id="add-schedule-btn"
+              onclick="openAddModal()" style="display:none;">
+        + New Task
+      </button>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div id="alert-msg" class="alert" style="display:none;"></div>
+
+    <div class="table-card">
+      <div class="table-header">
+        <h3>All Maintenance Tasks</h3>
+        <span style="font-size:12px;color:#9E9E9E;" id="sched-count"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Equipment</th>
+              <th>Type</th>
+              <th>Scheduled Date</th>
+              <th>Technician</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="sched-tbody">
+            <tr><td colspan="7"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Schedule Modal -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <h2>Create Maintenance Task</h2>
+    <div id="add-error" class="alert alert-danger" style="display:none;"></div>
+    <div class="form-group">
+      <label>Task Title</label>
+      <input type="text" id="s-title" placeholder="e.g. Pasteurizer Monthly Inspection">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Equipment</label>
+        <select id="s-equipment"></select>
+      </div>
+      <div class="form-group">
+        <label>Assigned Technician</label>
+        <select id="s-technician"></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Maintenance Type</label>
+        <select id="s-type">
+          <option value="preventive">Preventive</option>
+          <option value="corrective">Corrective</option>
+          <option value="inspection">Inspection</option>
+          <option value="calibration">Calibration</option>
+          <option value="cleaning">Cleaning</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Scheduled Date</label>
+        <input type="date" id="s-date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Estimated Duration (minutes)</label>
+      <input type="number" id="s-duration" placeholder="e.g. 120">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="s-desc" placeholder="Describe what needs to be done..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeAddModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="createSchedule()">Create Task</button>
+    </div>
+  </div>
+</div>
+
+<!-- Update Status Modal -->
+<div class="modal-overlay" id="status-modal">
+  <div class="modal" style="max-width:400px;">
+    <h2>Update Task Status</h2>
+    <input type="hidden" id="status-task-id">
+    <div class="form-group">
+      <label>New Status</label>
+      <select id="new-status">
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Completion Notes</label>
+      <textarea id="status-notes"
+        placeholder="Describe what was done, any parts replaced, observations...">
+      </textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeStatusModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="updateStatus()">Update Status</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/schedules.js"></script>
+</body>
+</html>

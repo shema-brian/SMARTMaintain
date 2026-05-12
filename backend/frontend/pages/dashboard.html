@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMARTMaintain — Dashboard</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <h2>SMARTMaintain</h2>
+    <p>Masaka Farms, Kigali</p>
+  </div>
+  <nav class="sidebar-nav">
+    <p class="nav-label">Main Menu</p>
+    <a class="nav-item active" href="dashboard.html">
+      <span class="icon">&#9632;</span> Dashboard
+    </a>
+    <a class="nav-item" href="equipment.html">
+      <span class="icon">&#9881;</span> Equipment
+    </a>
+    <a class="nav-item" href="schedules.html">
+      <span class="icon">&#128197;</span> Schedules
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">--</div>
+      <div class="user-info">
+        <p id="user-name">Loading...</p>
+        <span id="user-role">--</span>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="Auth.logout()">Sign out</button>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main">
+  <div class="topbar">
+    <h1>Dashboard</h1>
+    <div class="topbar-right">
+      <span style="font-size:12px;color:#9E9E9E;" id="current-date"></span>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Total Equipment</div>
+        <div class="kpi-value" id="kpi-equipment">--</div>
+        <div class="kpi-sub">Registered machines</div>
+      </div>
+      <div class="kpi-card danger">
+        <div class="kpi-label">Overdue Tasks</div>
+        <div class="kpi-value" id="kpi-overdue">--</div>
+        <div class="kpi-sub">Require immediate action</div>
+      </div>
+      <div class="kpi-card warning">
+        <div class="kpi-label">In Progress</div>
+        <div class="kpi-value" id="kpi-inprogress">--</div>
+        <div class="kpi-sub">Currently being worked on</div>
+      </div>
+      <div class="kpi-card info">
+        <div class="kpi-label">Scheduled</div>
+        <div class="kpi-value" id="kpi-scheduled">--</div>
+        <div class="kpi-sub">Upcoming tasks</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-label">Completed</div>
+        <div class="kpi-value" id="kpi-completed">--</div>
+        <div class="kpi-sub">This month</div>
+      </div>
+    </div>
+
+    <!-- Overdue Tasks Table -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>&#9888; Overdue Tasks</h3>
+        <a href="schedules.html" class="btn btn-outline">View All Schedules</a>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Equipment</th>
+              <th>Technician</th>
+              <th>Due Date</th>
+              <th>Days Overdue</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="overdue-tbody">
+            <tr><td colspan="6"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Upcoming Tasks Table -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>&#128197; Upcoming This Week</h3>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Equipment</th>
+              <th>Technician</th>
+              <th>Due Date</th>
+              <th>Days Until Due</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="upcoming-tbody">
+            <tr><td colspan="6"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>&#128203; Recent Activity</h3>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Equipment</th>
+              <th>Type</th>
+              <th>Scheduled Date</th>
+              <th>Technician</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="recent-tbody">
+            <tr><td colspan="6"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
+</html>
