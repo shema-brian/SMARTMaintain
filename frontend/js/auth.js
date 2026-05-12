@@ -3,7 +3,7 @@
 //  Handles token storage and user session
 // ─────────────────────────────────────────
 
-const API = 'http://localhost:5000/api';
+const API = 'https://smartmaintain-api.onrender.com/api';
 
 const Auth = {
   // Save token and user after login
